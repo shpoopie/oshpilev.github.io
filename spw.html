@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head><style type="text/css">
+.button {
+    position: fixed;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 500px; /* width of button */
+    height: 30px; /* height of button */
+    font-size: 80px;
+}
+</style></head>
+<body>
+<script>
+	const url = new URLSearchParams(window.location.search);
+	const str = String(url);
+	
+	if  (str.indexOf("_branch_match_id") >= 0 && str.indexOf("%243p") >= 0)
+	{	
+		//split out the value between 3p and branch_match_id
+		var params = str.split('%243p').pop().split('&_branch_match_id')[0];
+		// build a link
+		var fullurl = "https://branchster.app.link/?%243p" + params;
+	} 
+	// for cases where _branch_match_id is last
+	else if (str.indexOf("&_branch_match_id") >= 0)
+	{
+		//split out the value between ? and branch_match_id
+		var params = str.split('?').pop().split('&_branch_match_id')[0];
+		// build a link
+		var fullurl = "https://branchster.app.link/?" + params;	
+	} 
+	// for cases where _branch_match_id is first
+	else if (str.indexOf("_branch_match_id") >= 0)
+	{
+		//take all query param value after the _branch_match_id
+		var params = str.substring(str.indexOf('&') + 1);
+		// build a link
+		var fullurl = "https://branchster.app.link/?" + params;
+	}
+	else 
+	{
+		var fullurl = "https://branchster.app.link/?~campaign=organic";
+	}
+
+
+ </script>
+
+<h1>Parameter Carryover Testing</h1>
+
+<body>
+<a href="" id="fullurl" class="button">Go to App</a>
+<script>
+document.getElementById("fullurl").href = fullurl;
+</script>
+
+</body>
+
+
+</body>
+</html>

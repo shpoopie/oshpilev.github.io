@@ -1,0 +1,86 @@
+<script type="text/javascript">
+       // Query Params Scraper
+       const queryString = window.location.search;
+       const urlParams = new URLSearchParams(queryString);
+       const campaign = urlParams.get('utm_campaign');
+       const channel = urlParams.get('utm_source');
+       const feature = urlParams.get('paid_advertising');
+       const GCLID = urlParams.get('gclid');
+       const FBCLID = urlParams.get('fbclid');
+ 
+       function getBranchLinkData(isTMTA, isBadge) {
+           if (GCLID != null) {
+               return {
+                   campaign: campaign,
+                   channel: channel,
+                   feature: feature,
+                   tags: [],
+                   alias: '',
+                   data: {
+                       'gclid': GCLID,
+			   '$3p': 'a_google_adwords'
+                   }
+               };
+           }
+           if (FBCLID != null) {
+               return {
+                   campaign: campaign,
+                   channel: channel,
+                   feature: feature,
+                   tags: [],
+                   alias: '',
+                   data: {
+                       '~fbclid': FBCLID,
+			   '$3p': 'a_facebook'
+                   }
+               };
+           }
+           if (isTMTA) {
+               return {
+                   campaign: 'SMS',
+                   channel: 'Website',
+                   feature: 'Text Me The App',
+                   tags: [],
+                   alias: '',
+                   data: {
+                       'custom_bool': true,
+                       'custom_int': Date.now(),
+                       'gif': 'just-do-it',
+                       '$og_title': '[Example]',
+                       '$og_description': 'Branch SDK Test App',
+                   }
+               };
+           }
+           if (isBadge) {
+               return {
+                   campaign: 'App Badge',
+                   channel: 'Website',
+                   feature: 'Download the App',
+                   tags: [],
+                   alias: '',
+                   data: {
+                       'custom_bool': true,
+                       'custom_int': Date.now(),
+                       'gif': 'just-do-it',
+                       '$og_title': '[Example]',
+                       '$og_description': 'Branch SDK Test App',
+                   }
+               }
+           }
+       };
+// Call on TMTA CTA
+       function sendSMS(form) {
+          var phone = form.phone.value;
+          branch.sendSMS(phone, getBranchLinkData(true, false), linkOptions,callback);
+       };
+// Call on Badge CTA
+       function badgeClicked() {
+           branch.link(getBranchLinkData(false, true), function (err, link) {
+               if (err) {
+                   alert("Sorry, something went wrong.");
+               } else {
+                   window.location.href = link;
+               }
+           });
+       };
+   </script>

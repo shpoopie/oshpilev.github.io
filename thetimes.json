@@ -1,0 +1,41 @@
+{
+  "applinks": {
+    "apps": [
+      
+    ],
+    "details": [
+      {
+        "appID": "6WLFX9493N.com.thetimes.timesmobile",
+        "paths": [
+          "NOT /e/*",
+          "*",
+          "/"
+        ]
+      },
+      {
+        "appID": "7L966963CD.com.thetimes.timesoflondonmobile",
+        "paths": [
+          "NOT /e/*",
+          "*",
+          "/"
+        ]
+      },
+      {
+        "appID": "YKZC45UL42.com.thetimesireland.timesmobile",
+        "paths": [
+          "NOT /e/*",
+          "*",
+          "/"
+        ]
+      },
+      {
+        "appID": "6WLFX9493N.com.thetimes.timesmobile",
+        "paths": [
+          "NOT /e/*",
+          "*",
+          "/"
+        ]
+      }
+    ]
+  }
+}
