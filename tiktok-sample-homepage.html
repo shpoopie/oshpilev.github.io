@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Events Test Page</title>
+    <style>
+        :root {
+            --primary-color: #25F4EE;
+            --secondary-color: #FE2C55;
+            --background-color: #f8f9fa;
+            --card-background: #ffffff;
+            --text-color: #333333;
+            --border-radius: 12px;
+            --transition-speed: 0.2s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: var(--border-radius);
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .status-card {
+            background: var(--card-background);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .card {
+            background: var(--card-background);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            color: white;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '→';
+            position: absolute;
+            right: 1.5rem;
+            opacity: 0;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .btn:hover::after {
+            opacity: 1;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background: #20d8d2;
+            transform: translateX(5px);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-color);
+        }
+
+        .btn-secondary:hover {
+            background: #e82546;
+            transform: translateX(5px);
+        }
+
+        .event-data {
+            background: var(--card-background);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin-top: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .event-data pre {
+            background: var(--background-color);
+            padding: 1.5rem;
+            border-radius: calc(var(--border-radius) - 4px);
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        #eventStatus {
+            font-size: 1.1rem;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .status-success {
+            color: #00c853;
+            font-weight: 500;
+        }
+
+        /* Add a subtle fade in animation for the event data */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .event-data pre {
+            animation: fadeIn 0.3s ease;
+        }
+    </style>
+
+    <!-- Add your TikTok Pixel base code here -->
+    <script>
+        !function (w, d, t) {
+            // Add your pixel code here
+        }(window, document, 'script');
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>TikTok Events Test Page</h1>
+            <p>Test your pixel and server events integration</p>
+        </header>
+        
+        <div class="status-card">
+            <h2>Event Status</h2>
+            <div id="eventStatus">No events triggered yet</div>
+        </div>
+
+        <div class="grid">
+            <!-- Core Events -->
+            <div class="card">
+                <h2>Core Events</h2>
+                <div class="button-group">
+                    <button onclick="triggerEvent('ViewContent')" class="btn btn-primary">ViewContent</button>
+                    <button onclick="triggerEvent('Click')" class="btn btn-primary">Click</button>
+                    <button onclick="triggerEvent('Search')" class="btn btn-primary">Search</button>
+                    <button onclick="triggerEvent('AddToCart')" class="btn btn-primary">AddToCart</button>
+                    <button onclick="triggerEvent('InitiateCheckout')" class="btn btn-primary">InitiateCheckout</button>
+                    <button onclick="triggerEvent('AddPaymentInfo')" class="btn btn-primary">AddPaymentInfo</button>
+                    <button onclick="triggerEvent('CompletePayment')" class="btn btn-primary">CompletePayment</button>
+                    <button onclick="triggerEvent('PlaceAnOrder')" class="btn btn-primary">PlaceAnOrder</button>
+                </div>
+            </div>
+
+            <!-- Additional Events -->
+            <div class="card">
+                <h2>Additional Events</h2>
+                <div class="button-group">
+                    <button onclick="triggerEvent('Contact')" class="btn btn-secondary">Contact</button>
+                    <button onclick="triggerEvent('Download')" class="btn btn-secondary">Download</button>
+                    <button onclick="triggerEvent('SubmitForm')" class="btn btn-secondary">SubmitForm</button>
+                    <button onclick="triggerEvent('CompleteRegistration')" class="btn btn-secondary">CompleteRegistration</button>
+                    <button onclick="triggerEvent('Subscribe')" class="btn btn-secondary">Subscribe</button>
+                    <button onclick="triggerEvent('StartTrial')" class="btn btn-secondary">StartTrial</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="event-data">
+            <h2>Sample Event Data</h2>
+            <pre id="eventData"></pre>
+        </div>
+    </div>
+
+    <script>
+        // Sample event data with recommended parameters for each event type
+        const sampleEventData = {
+            ViewContent: {
+                content_type: 'product',
+                content_id: 'P123',
+                content_name: 'Sample Product',
+                currency: 'USD',
+                value: 99.99
+            },
+            Click: {
+                button_type: 'buy_now',
+                content_type: 'product',
+                content_id: 'P123'
+            },
+            Search: {
+                search_string: 'blue jeans',
+                content_type: 'product_group'
+            },
+            AddToCart: {
+                content_type: 'product',
+                content_id: 'P123',
+                content_name: 'Sample Product',
+                value: 99.99,
+                currency: 'USD',
+                quantity: 1
+            },
+            InitiateCheckout: {
+                value: 99.99,
+                currency: 'USD',
+                contents: [{
+                    content_id: 'P123',
+                    content_name: 'Sample Product',
+                    quantity: 1,
+                    price: 99.99
+                }],
+                num_items: 1
+            },
+            AddPaymentInfo: {
+                content_type: 'product',
+                content_id: 'P123',
+                value: 99.99,
+                currency: 'USD'
+            },
+            CompletePayment: {
+                value: 99.99,
+                currency: 'USD',
+                content_type: 'product',
+                content_id: 'P123',
+                payment_method: 'credit_card'
+            },
+            PlaceAnOrder: {
+                value: 99.99,
+                currency: 'USD',
+                content_type: 'product',
+                content_id: 'P123',
+                order_id: 'ORDER123'
+            },
+            Contact: {
+                content_type: 'contact_form',
+                content_name: 'support_inquiry'
+            },
+            Download: {
+                content_type: 'pdf',
+                content_name: 'product_catalog'
+            },
+            SubmitForm: {
+                content_type: 'form',
+                content_name: 'newsletter_signup'
+            },
+            CompleteRegistration: {
+                content_type: 'account',
+                currency: 'USD',
+                value: 0,
+                status: true
+            },
+            Subscribe: {
+                content_type: 'subscription',
+                currency: 'USD',
+                value: 19.99,
+                subscription_plan: 'monthly'
+            },
+            StartTrial: {
+                content_type: 'subscription',
+                currency: 'USD',
+                value: 0,
+                subscription_plan: 'monthly_trial'
+            }
+        };
+
+        function triggerEvent(eventName) {
+            // Update status display
+            const status = document.getElementById('eventStatus');
+            status.textContent = `Triggered event: ${eventName} at ${new Date().toLocaleTimeString()}`;
+            status.className = 'status-success';
+
+            // Get event data
+            const data = sampleEventData[eventName] || { event_name: eventName };
+            
+            // Display event data
+            const eventData = document.getElementById('eventData');
+            eventData.textContent = JSON.stringify(data, null, 2);
+
+            // Log to console for debugging
+            console.log(`Triggered ${eventName} event`, data);
+            
+            // Trigger TikTok pixel event (uncomment and replace with your pixel code)
+            /*
+            ttq.track(eventName, {
+                ...data
+            });
+            */
+
+            // Optional: Add server-side event tracking here
+            /*
+            fetch('your-server-endpoint', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    event_name: eventName,
+                    event_data: data,
+                    timestamp: new Date().toISOString()
+                })
+            });
+            */
+        }
+    </script>
+</body>
+</html>
