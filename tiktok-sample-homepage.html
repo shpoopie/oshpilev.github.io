@@ -366,6 +366,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
             // Log to console for debugging
             console.log(`Triggered ${eventName} event`, data);
+
+            
+            window.dataLayer.push({'event': ${eventName}});
             
             // Trigger TikTok pixel event (uncomment and replace with your pixel code)
             /*
