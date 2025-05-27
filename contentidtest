@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TikTok Pixel Test Page</title>
+<!-- TikTok Pixel Code Start -->
+<script>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+
+  ttq.load('CU3DMSRC77UAHHG8VCCG');
+  ttq.page();
+}(window, document, 'ttq');
+</script>
+<!-- TikTok Pixel Code End -->
+
+</head>
+<body>
+  <h1>TikTok Pixel Test</h1>
+  <p>Click the button below to simulate a ViewContent event:</p>
+  <button id="viewContentBtn">Trigger ViewContent</button>
+
+  <!-- Button click triggers ViewContent event -->
+  <script>
+    document.getElementById("viewContentBtn").addEventListener("click", function() {
+      ttq.track("ViewContent", {
+        content_id: "test123",
+        content_type: "product",
+        value: 29.99,
+        currency: "USD"
+      });
+      alert("ViewContent event triggered with dummy data!");
+    });
+    document.getElementById("addToCartBtn").addEventListener("click", function() {
+      ttq.track("AddToCart", {
+        content_id: 123,
+        content_type: "product",
+        value: 29.99,
+        currency: "USD",
+        quantity: 1
+      });
+      alert("AddToCart event triggered with dummy data!");
+    });
+
+  </script>
+</body>
+</html>
